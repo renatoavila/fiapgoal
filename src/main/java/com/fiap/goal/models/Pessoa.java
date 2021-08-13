@@ -25,7 +25,15 @@ public class Pessoa implements Serializable{
     @OneToOne
     private Conta conta;
     
-    public long getCodigo() {
+    public Pessoa() {
+    	super();
+    }
+    
+    public Pessoa(String nome) {
+		super();
+		this.nome = nome;
+	}
+	public long getCodigo() {
 		return codigo;
 	}
 	public void setCodigo(long codigo) {

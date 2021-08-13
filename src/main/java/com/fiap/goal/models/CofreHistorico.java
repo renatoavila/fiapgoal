@@ -22,7 +22,18 @@ public class CofreHistorico  implements Serializable{
 	private long codigo;	 
 	private Date operacao;
 	private double valor;
-	 
+	
+	public CofreHistorico() {
+		super(); 
+	}
+	
+	public CofreHistorico(double valor, Cofre cofre) {
+		super();
+		this.operacao = new Date(System.currentTimeMillis());
+		this.valor = valor;
+		this.cofre = cofre;
+	}
+
 	@ManyToOne
 	private Cofre cofre;
 	 

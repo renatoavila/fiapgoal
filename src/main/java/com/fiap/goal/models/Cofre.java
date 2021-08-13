@@ -36,6 +36,18 @@ public class Cofre implements Serializable{
     @OneToMany
     private List<CofreHistorico> cofreHistorico;
     
+    public Cofre() {
+    	super();
+    }
+	
+	public Cofre(String nome, String descricaoMeta, Date vencimentoMeta, double valorMeta, Conta conta) {
+		super();
+		this.nome = nome;
+		this.descricaoMeta = descricaoMeta;
+		this.vencimentoMeta = vencimentoMeta;
+		this.valorMeta = valorMeta;
+		this.conta = conta;
+	}
 	
 	public long getCodigo() {
 		return codigo;

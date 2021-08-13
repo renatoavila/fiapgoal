@@ -26,6 +26,17 @@ public class Conta implements Serializable{
 	private String agencia;
 	private String numero;
 	
+	public Conta() {
+		super(); 
+	}
+	
+	public Conta(String agencia, String numero, Pessoa pessoa) {
+		super();
+		this.agencia = agencia;
+		this.numero = numero;
+		this.pessoa = pessoa;
+	}
+	
 	@OneToOne
 	private Pessoa pessoa;
 	
