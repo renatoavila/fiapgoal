@@ -25,23 +25,24 @@ public class Conta implements Serializable{
 	 
 	private String agencia;
 	private String numero;
+	private Double saldo;
+	@OneToOne
+	private Pessoa pessoa;	
+    @OneToMany
+	private List<Cofre> cofre;
+	
 	
 	public Conta() {
 		super(); 
 	}
 	
-	public Conta(String agencia, String numero, Pessoa pessoa) {
+	public Conta(String agencia, String numero, Double saldo, Pessoa pessoa) {
 		super();
 		this.agencia = agencia;
 		this.numero = numero;
+		this.saldo = saldo;
 		this.pessoa = pessoa;
 	}
-	
-	@OneToOne
-	private Pessoa pessoa;
-	
-    @OneToMany
-	private List<Cofre> cofre;
 	
 	public long getCodigo() {
 		return codigo;
@@ -74,6 +75,15 @@ public class Conta implements Serializable{
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
+
+	public Double getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(Double saldo) {
+		this.saldo = saldo;
+	}
+	
 	
 	
 }

@@ -12,9 +12,9 @@ import com.fiap.goal.models.Pessoa;
 public class GoalApplication {
 
 	public static void main(String[] args) {
+ 
 		SpringApplication.run(GoalApplication.class, args);
 	}
 	
 	 
-
 }

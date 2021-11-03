@@ -8,20 +8,12 @@ import java.util.Optional;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
  
-
+@Service
 public class CofreBusiness {
  
-	@Test
-	public void Tela1() {
-		  
-		  ContaBusiness contaBusiness = new ContaBusiness();
-		  Pessoa pessoa = new Pessoa("renato");
-		  Conta conta = new Conta("123", "456", pessoa);		   
-		  contaBusiness.criarConta(conta);
-
- 
-	}
+	
 	@Autowired
 	CofreRepository cofreRepository;
 	
@@ -53,11 +45,11 @@ public class CofreBusiness {
 		 
 		cofre.setValorTotal(cofre.getValorTotal() - valor);
 		
-		if(cofre.getValorTotal() > 0)
+		if(cofre.getValorTotal() >= 0)
 		{		
 			cofreRepository.save(cofre);
 			
-			CofreHistorico cofreHistorico = new CofreHistorico(- valor, cofre);
+			CofreHistorico cofreHistorico = new CofreHistorico(-valor, cofre);
 			cofreHistoricoRepository.save(cofreHistorico);
 			
 			return true;

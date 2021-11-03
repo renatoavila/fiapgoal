@@ -1,4 +1,4 @@
-package com.fiap.goal.data;
+/* package com.fiap.goal.data;
  
 import javax.sql.DataSource;
 
@@ -15,7 +15,7 @@ public class DataConfiguration {
 	 public DataSource dataSource(){
 		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/fiapgoal");
+        dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/fiapgoal2");
         dataSource.setUsername("root");
        // dataSource.setPassword("");
         return dataSource;
@@ -32,3 +32,4 @@ public class DataConfiguration {
 		return adapter;
 	}
 }
+ */
