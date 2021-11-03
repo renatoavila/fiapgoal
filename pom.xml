@@ -15,7 +15,7 @@
 	<name>goal</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>15</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -80,8 +80,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+				<version>2.3.2</version>
+			</plugin>			
 		</plugins>
+		
 	</build>
 
 </project>
