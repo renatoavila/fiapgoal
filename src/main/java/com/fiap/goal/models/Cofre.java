@@ -10,8 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Cofre implements Serializable{
@@ -29,8 +32,9 @@ public class Cofre implements Serializable{
 	private Date vencimentoMeta;
     private double valorTotal;
     private double valorMeta;
-    
+
     @ManyToOne
+    @JsonIgnore
     private Conta conta;
     
     @OneToMany
@@ -40,11 +44,23 @@ public class Cofre implements Serializable{
     	super();
     }
 	
-	public Cofre(String nome, String descricaoMeta, Date vencimentoMeta, double valorMeta, Conta conta) {
+	public Cofre(String nome, String descricaoMeta, Date cadastro, Date vencimentoMeta,double valorMeta, Conta conta) {
 		super();
 		this.nome = nome;
 		this.descricaoMeta = descricaoMeta;
 		this.vencimentoMeta = vencimentoMeta;
+		this.valorMeta = valorMeta;
+		this.conta = conta;
+		this.cadastro = cadastro;
+	}
+	
+	public Cofre(long codigo, String nome, String descricaoMeta,Date cadastro, Date vencimentoMeta,  double valorMeta, Conta conta) {
+		super();
+		this.codigo = codigo;
+		this.nome = nome;
+		this.descricaoMeta = descricaoMeta;
+		this.vencimentoMeta = vencimentoMeta;
+		this.cadastro = cadastro;
 		this.valorMeta = valorMeta;
 		this.conta = conta;
 	}

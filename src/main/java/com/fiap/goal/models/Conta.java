@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
  
 
 @Entity
@@ -27,8 +29,9 @@ public class Conta implements Serializable{
 	private String numero;
 	private Double saldo;
 	@OneToOne
+	@JsonIgnore
 	private Pessoa pessoa;	
-    @OneToMany
+	@OneToMany
 	private List<Cofre> cofre;
 	
 	

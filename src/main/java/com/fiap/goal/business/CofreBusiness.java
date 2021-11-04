@@ -27,6 +27,10 @@ public class CofreBusiness {
 	public void editarCofre(Cofre cofre) { 
 		cofreRepository.save(cofre);
 	}
+	
+	public List<Cofre> buscarCofreDaConta(Conta conta) { 
+		return this.cofreRepository.findByConta(conta);
+	}
 	  
 	public Optional<Cofre> buscarCofre(long Codigo) { 
 		return cofreRepository.findById(Codigo);
