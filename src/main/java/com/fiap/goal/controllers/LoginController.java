@@ -25,6 +25,7 @@ public class LoginController {
 	 @RequestMapping(value = "api/login/", method = RequestMethod.POST)
 	public  ResponseEntity<Pessoa> get(@RequestBody UsuarioViewModel usuario) {
 		 
+		 System.out.println(usuario);
 		 Pessoa pessoa = pessoaBusiness.buscaPessoa(usuario);
 		 
 		 if(pessoa != null)
