@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fiap.goal.models.*;
 import com.fiap.goal.repository.*;
+import com.google.gson.Gson;
 import com.fiap.goal.business.*;
 
 @RestController
@@ -33,6 +34,8 @@ public class PessoaController {
 	@RequestMapping(value = "api/pessoa/", method = RequestMethod.POST)
 	public ResponseEntity<Pessoa> post(@RequestBody PessoaViewModel pessoaModel) {
 
+		Log(pessoaModel);
+		 
 		Pessoa pessoa = new Pessoa(pessoaModel.getNome(), pessoaModel.getEmail(), pessoaModel.getSenha());
 
 		pessoaBusiness.criarPessoa(pessoa);
@@ -48,7 +51,8 @@ public class PessoaController {
 	
 	@RequestMapping(value = "api/pessoa/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Pessoa> put(@PathVariable(value = "id") int id, @RequestBody PessoaViewModel pessoaModel) {
-
+		Log(pessoaModel);
+		
 		Pessoa pessoa = new Pessoa(id, pessoaModel.getNome(), pessoaModel.getEmail(), pessoaModel.getSenha());
 
 		pessoaBusiness.atualizarPessoa(pessoa);
@@ -63,7 +67,7 @@ public class PessoaController {
 	
 	@RequestMapping(value = "api/pessoa/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Pessoa> get(@PathVariable(value = "id") int id) {
-
+		Log(id);
 		Pessoa pessoa = pessoaBusiness.buscaPessoa(id);
 
 		if (pessoa != null)
@@ -74,7 +78,7 @@ public class PessoaController {
 
 	@RequestMapping(value = "api/pessoa/{id}/conta/", method = RequestMethod.GET)
 	public ResponseEntity<Conta> getPessoaConta(@PathVariable(value = "id") int id) {
-
+		Log(id);
 		Conta conta = contaBusiness.buscarConta(id);
 
 		if (conta != null)
@@ -85,7 +89,7 @@ public class PessoaController {
 	
 	@RequestMapping(value = "api/pessoa/{id}/conta/cofre/", method = RequestMethod.POST)
 	public ResponseEntity<Conta> postCofre(@PathVariable(value = "id") int id, @RequestBody CofreViewModel cofreModel) {
-	 
+		Log(cofreModel);
 		Conta conta = contaBusiness.buscarConta(id);
 		Cofre cofre = new Cofre(
 				cofreModel.getNome(),
@@ -102,7 +106,7 @@ public class PessoaController {
 	
 	@RequestMapping(value = "api/pessoa/{id}/conta/cofre/{idCofre}", method = RequestMethod.PUT)
 	public ResponseEntity<Cofre> putCofre(@PathVariable(value = "id") int id,@PathVariable(value = "idCofre") int idCofre,@RequestBody CofreViewModel cofreModel) {
-
+		Log(cofreModel);
 		Conta conta = contaBusiness.buscarConta(id);
 		Cofre cofre = new Cofre(
 				idCofre,
@@ -116,5 +120,11 @@ public class PessoaController {
 		 cofreBusiness.criarCofre(cofre);
 		 return new ResponseEntity<>(HttpStatus.OK);
 	}
+	
+	private void Log(Object o) {
+		Gson gson = new Gson();    
+	    String json = gson.toJson(o);
+	    System.out.println(json);
+ }
 
 }

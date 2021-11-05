@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fiap.goal.models.*; 
 import com.fiap.goal.repository.*; 
 import com.fiap.goal.business.*;
+import com.google.gson.Gson;
 
 @RestController
 public class LoginController {
@@ -25,7 +26,11 @@ public class LoginController {
 	 @RequestMapping(value = "api/login/", method = RequestMethod.POST)
 	public  ResponseEntity<Pessoa> get(@RequestBody UsuarioViewModel usuario) {
 		 
-		 System.out.println(usuario);
+		 	Gson gson = new Gson();    
+		    String json = gson.toJson(usuario);
+		    System.out.println(json);
+		    
+		 System.out.println("");
 		 Pessoa pessoa = pessoaBusiness.buscaPessoa(usuario);
 		 
 		 if(pessoa != null)
