@@ -62,7 +62,7 @@ public class CofreBusiness {
 		if(conta.getSaldo() >= 0)
 		{
 			contaBusiness.editarConta(conta);
-			cofreRepository.save(cofre);
+			cofreRepository.delete(cofre);
 			return true;
 		}
 		else {
