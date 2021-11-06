@@ -43,19 +43,23 @@ public class ContaBusiness {
 			return conta;		 
 	}
 	
-	public Conta buscarContaPorPessoa(long codigoPessoa) {
+	public Conta buscarContaPorPessoa(long codigoPessoa, Boolean fazerSomaCofre) {
 
 		Pessoa pessoa = pessoaBusiness.buscaPessoa(codigoPessoa);
 		if (pessoa != null) {
 			Conta conta = contaRepository.findByPessoa(pessoa);
 			if (conta != null) {
 				var cofre = cofreBusiness.buscarCofreDaConta(conta);
-				double soma = 0;
-				for(int i = 0; i < cofre.size(); i++)
+				
+				if(fazerSomaCofre)
 				{
-					soma += cofre.get(i).getValorTotal();
+					double soma = 0;
+					for(int i = 0; i < cofre.size(); i++)
+					{
+						soma += cofre.get(i).getValorTotal();
+					}
+					conta.setSaldo(conta.getSaldo() + soma);
 				}
-				conta.setSaldo(conta.getSaldo() + soma);
 
 				conta.setCofre(cofre);
 			}

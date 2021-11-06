@@ -55,7 +55,7 @@ public class CofreBusiness {
 	
 	public Boolean deletarCofre(int codigoPessoa, int codigoCofre) { 
 		
-		Conta contaTemp = contaBusiness.buscarContaPorPessoa(codigoPessoa);	  
+		Conta contaTemp = contaBusiness.buscarContaPorPessoa(codigoPessoa, false);	  
 		Conta conta = contaBusiness.buscarConta(contaTemp.getCodigo());	
 		Cofre cofre = this.buscarCofre(codigoCofre).get();
 		conta.setSaldo(conta.getSaldo() + cofre.getValorTotal() );
