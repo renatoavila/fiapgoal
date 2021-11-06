@@ -28,6 +28,8 @@ public class Cofre implements Serializable{
 	 
 	private String nome;
 	private String descricaoMeta;
+
+    @JsonIgnore
 	private Date cadastro;
 	private Date vencimentoMeta;
     private double valorTotal;
@@ -44,22 +46,24 @@ public class Cofre implements Serializable{
     	super();
     }
 	
-	public Cofre(String nome, String descricaoMeta, Date cadastro, Date vencimentoMeta,double valorMeta, Conta conta) {
+	public Cofre(String nome, String descricaoMeta, Date cadastro, Date vencimentoMeta,double valorMeta,double valorTotal, Conta conta) {
 		super();
 		this.nome = nome;
 		this.descricaoMeta = descricaoMeta;
 		this.vencimentoMeta = vencimentoMeta;
 		this.valorMeta = valorMeta;
+		this.valorTotal = valorTotal;
 		this.conta = conta;
 		this.cadastro = cadastro;
 	}
 	
-	public Cofre(long codigo, String nome, String descricaoMeta,Date cadastro, Date vencimentoMeta,  double valorMeta, Conta conta) {
+	public Cofre(long codigo, String nome, String descricaoMeta,Date cadastro, Date vencimentoMeta,  double valorMeta,  double valorTotal, Conta conta) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
 		this.descricaoMeta = descricaoMeta;
 		this.vencimentoMeta = vencimentoMeta;
+		this.valorTotal = valorTotal;
 		this.cadastro = cadastro;
 		this.valorMeta = valorMeta;
 		this.conta = conta;
