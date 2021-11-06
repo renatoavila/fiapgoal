@@ -39,8 +39,9 @@ public class CofreBusiness {
 	
 	public Boolean editarCofre(Cofre cofre) { 
 		Cofre cofreAnterior = this.buscarCofre(cofre.getCodigo()).get();
-		Conta conta = contaBusiness.buscarConta(cofre.getConta().getCodigo());		 
-		conta.setSaldo(conta.getSaldo() - cofreAnterior.getValorTotal()  - cofre.getValorTotal());
+		Conta conta = contaBusiness.buscarConta(cofre.getConta().getCodigo());	
+		Double diferenca =  cofreAnterior.getValorTotal() - cofre.getValorTotal();
+		conta.setSaldo(conta.getSaldo() + diferenca);
 		if(conta.getSaldo() >= 0)
 		{
 			contaBusiness.editarConta(conta);
