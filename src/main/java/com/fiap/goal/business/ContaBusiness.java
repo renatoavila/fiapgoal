@@ -35,6 +35,13 @@ public class ContaBusiness {
 			Conta conta = contaRepository.findByPessoa(pessoa);
 			if (conta != null) {
 				var cofre = cofreBusiness.buscarCofreDaConta(conta);
+				double soma = 0;
+				for(int i = 0; i < cofre.size(); i++)
+				{
+					soma += cofre.get(i).getValorTotal();
+				}
+				conta.setSaldo(soma);
+
 				conta.setCofre(cofre);
 			}
 			return conta;
