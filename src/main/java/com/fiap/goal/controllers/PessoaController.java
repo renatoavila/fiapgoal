@@ -135,7 +135,7 @@ public class PessoaController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
-	@RequestMapping(value = "api/pessoa/{id}/conta/{idConta}/promocao", method = RequestMethod.POST)
+	@RequestMapping(value = "api/pessoa/{id}/conta/{idConta}/promocao/", method = RequestMethod.POST)
 	public ResponseEntity<Boolean> postPromocao(@PathVariable(value = "id") long id, @PathVariable(value = "idConta") long idConta, @RequestBody Double valor) {
 
 		Log(valor);
@@ -144,7 +144,7 @@ public class PessoaController {
 		return new ResponseEntity<Boolean>(sucesso,sucesso ? HttpStatus.OK : HttpStatus.NOT_FOUND);
 	}
 	
-	@RequestMapping(value = "api/pessoa/{id}/usouPromocao", method = RequestMethod.GET)
+	@RequestMapping(value = "api/pessoa/{id}/usouPromocao/", method = RequestMethod.GET)
 	public ResponseEntity<Boolean> getUsouPromocao(@PathVariable(value = "id") long id) {
  
 		PessoaPromocao pessoaPromocao = pessoaPromocaoBusiness.usouPromocao(id);  
