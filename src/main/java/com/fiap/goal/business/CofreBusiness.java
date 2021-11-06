@@ -61,6 +61,7 @@ public class CofreBusiness {
 		conta.setSaldo(conta.getSaldo() + cofre.getValorTotal() );
 		if(conta.getSaldo() >= 0)
 		{
+			cofre.setConta(conta);
 			contaBusiness.editarConta(conta);
 			cofreRepository.delete(cofre);
 			return true;
