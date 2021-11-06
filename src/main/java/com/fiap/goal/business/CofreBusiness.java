@@ -24,13 +24,49 @@ public class CofreBusiness {
 	@Autowired
 	CofreHistoricoRepository cofreHistoricoRepository;
 
-	public void criarCofre(Cofre cofre) { 
+	public Boolean criarCofre(Cofre cofre) { 
 		Conta conta = contaBusiness.buscarConta(cofre.getConta().getCodigo());
-		cofreRepository.save(cofre);
+		conta.setSaldo(conta.getSaldo() - cofre.getValorTotal());
+		if(conta.getSaldo() >= 0)
+		{
+			contaBusiness.editarConta(conta);
+			cofreRepository.save(cofre);
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
-	public void editarCofre(Cofre cofre) { 
-		cofreRepository.save(cofre);
+	public Boolean editarCofre(Cofre cofre) { 
+		Cofre cofreAnterior = this.buscarCofre(cofre.getCodigo()).get();
+		Conta conta = contaBusiness.buscarConta(cofre.getConta().getCodigo());		 
+		conta.setSaldo(conta.getSaldo() - cofre.getValorTotal() - cofreAnterior.getValorTotal());
+		if(conta.getSaldo() >= 0)
+		{
+			contaBusiness.editarConta(conta);
+			cofreRepository.save(cofre);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public Boolean deletarCofre(int codigoPessoa, int codigoCofre) { 
+		
+		Conta contaTemp = contaBusiness.buscarContaPorPessoa(codigoPessoa);	  
+		Conta conta = contaBusiness.buscarConta(contaTemp.getCodigo());	
+		Cofre cofre = this.buscarCofre(codigoCofre).get();
+		conta.setSaldo(conta.getSaldo() + cofre.getValorTotal() );
+		if(conta.getSaldo() >= 0)
+		{
+			contaBusiness.editarConta(conta);
+			cofreRepository.save(cofre);
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	public List<Cofre> buscarCofreDaConta(Conta conta) { 
