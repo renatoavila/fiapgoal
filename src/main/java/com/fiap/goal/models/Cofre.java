@@ -4,6 +4,7 @@ import java.util.List;
 import java.io.Serializable;
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,7 +36,8 @@ public class Cofre implements Serializable{
     private double valorTotal;
     private double valorMeta;
 
-    @ManyToOne
+    
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JsonIgnore
     private Conta conta;
     
