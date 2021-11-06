@@ -24,6 +24,8 @@ public class PessoaController {
 
 	@Autowired
 	PessoaBusiness pessoaBusiness;
+	@Autowired
+	PessoaPromocaoBusiness pessoaPromocaoBusiness;
 
 	@Autowired
 	ContaBusiness contaBusiness;
@@ -79,7 +81,7 @@ public class PessoaController {
 	@RequestMapping(value = "api/pessoa/{id}/conta/", method = RequestMethod.GET)
 	public ResponseEntity<Conta> getPessoaConta(@PathVariable(value = "id") int id) {
 		Log(id);
-		Conta conta = contaBusiness.buscarConta(id);
+		Conta conta = contaBusiness.buscarContaPorPessoa(id);
 
 		if (conta != null)
 			return new ResponseEntity<Conta>(conta, HttpStatus.OK);
@@ -90,7 +92,7 @@ public class PessoaController {
 	@RequestMapping(value = "api/pessoa/{id}/conta/cofre/", method = RequestMethod.POST)
 	public ResponseEntity<Cofre> postCofre(@PathVariable(value = "id") int id, @RequestBody CofreViewModel cofreModel) {
 		Log(cofreModel);
-		Conta conta = contaBusiness.buscarConta(id);
+		Conta conta = contaBusiness.buscarContaPorPessoa(id);
 		Cofre cofre = new Cofre(
 				cofreModel.getNome(),
 				cofreModel.getDescricaoMeta(),
@@ -102,12 +104,11 @@ public class PessoaController {
 		 cofreBusiness.criarCofre(cofre);
 		 return new ResponseEntity<Cofre>(cofre, HttpStatus.OK);
 	}
-
 	
 	@RequestMapping(value = "api/pessoa/{id}/conta/cofre/{idCofre}", method = RequestMethod.PUT)
 	public ResponseEntity<Cofre> putCofre(@PathVariable(value = "id") int id,@PathVariable(value = "idCofre") int idCofre,@RequestBody CofreViewModel cofreModel) {
 		Log(cofreModel);
-		Conta conta = contaBusiness.buscarConta(id);
+		Conta conta = contaBusiness.buscarContaPorPessoa(id);
 		Cofre cofre = new Cofre(
 				idCofre,
 				cofreModel.getNome(),
@@ -132,7 +133,23 @@ public class PessoaController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
+	@RequestMapping(value = "api/pessoa/{id}/conta/{idConta}/promocao", method = RequestMethod.POST)
+	public ResponseEntity<Boolean> postPromocao(@PathVariable(value = "id") long id, @PathVariable(value = "idConta") long idConta, @RequestBody Double valor) {
+
+		Log(valor);
+		  
+		Boolean sucesso = contaBusiness.depositarPromocao(id, idConta, valor);  
+		return new ResponseEntity<Boolean>(sucesso,sucesso ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+	}
 	
+	@RequestMapping(value = "api/pessoa/{id}/usouPromocao", method = RequestMethod.GET)
+	public ResponseEntity<Boolean> getusouPromocao(@PathVariable(value = "id") long id) {
+ 
+		PessoaPromocao pessoaPromocao = pessoaPromocaoBusiness.usouPromocao(id);  
+		Boolean sucesso = pessoaPromocao != null;
+		return new ResponseEntity<Boolean>(sucesso, sucesso ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+	}
+	  
 	
 	private void Log(Object o) {
 		Gson gson = new Gson();    

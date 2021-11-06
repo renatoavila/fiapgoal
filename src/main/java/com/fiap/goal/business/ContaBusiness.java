@@ -17,8 +17,12 @@ public class ContaBusiness {
 
 	@Autowired
 	private ContaRepository contaRepository;
+
 	@Autowired
 	private CofreBusiness cofreBusiness;
+	
+	@Autowired
+	private PessoaPromocaoBusiness pessoaPromocaoBusiness;
 
 	public void criarContaParaPessoa(Pessoa pessoa) {
 
@@ -27,10 +31,21 @@ public class ContaBusiness {
 		contaRepository.save(conta);
 
 	}
+	 
+	public void editarConta(Conta conta) {
+		 contaRepository.save(conta);
+	}
 
-	public Conta buscarConta(long idPessoa) {
 
-		Pessoa pessoa = pessoaBusiness.buscaPessoa(idPessoa);
+	public Conta buscarConta(long codigo) {
+ 
+			Conta conta = contaRepository.findById(codigo).get();			 
+			return conta;		 
+	}
+	
+	public Conta buscarContaPorPessoa(long codigoPessoa) {
+
+		Pessoa pessoa = pessoaBusiness.buscaPessoa(codigoPessoa);
 		if (pessoa != null) {
 			Conta conta = contaRepository.findByPessoa(pessoa);
 			if (conta != null) {
@@ -40,7 +55,7 @@ public class ContaBusiness {
 				{
 					soma += cofre.get(i).getValorTotal();
 				}
-				conta.setSaldo(soma);
+				conta.setSaldo(conta.getSaldo() + soma);
 
 				conta.setCofre(cofre);
 			}
@@ -48,4 +63,34 @@ public class ContaBusiness {
 		}
 		return null;
 	}
+
+	public Boolean depositarPromocao(long codigoPessoa, long codigoConta, Double valor) {
+		
+		
+		PessoaPromocao pessoaPromocao =  pessoaPromocaoBusiness.usouPromocao(codigoPessoa);
+		
+		if(pessoaPromocao != null)
+		{
+			return false;
+		}
+		
+		Conta conta = contaRepository.findById(codigoConta).get();
+		
+		if(conta == null)
+		{
+			return false;
+		}
+		
+		conta.setSaldo(conta.getSaldo() + valor);
+		contaRepository.save(conta);
+		 
+		Pessoa pessoa = pessoaBusiness.buscaPessoa(codigoPessoa);
+		pessoaPromocaoBusiness.criarPessoaPromocao(pessoa, valor);
+	 
+			
+		return true;
+		 
+				
+	}
+
 }

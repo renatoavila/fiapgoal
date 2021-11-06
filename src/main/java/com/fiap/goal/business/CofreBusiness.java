@@ -13,13 +13,19 @@ import org.springframework.stereotype.Service;
 public class CofreBusiness {
  
 	
+
 	@Autowired
 	CofreRepository cofreRepository;
+	
+
+	@Autowired
+	ContaBusiness contaBusiness;
 	
 	@Autowired
 	CofreHistoricoRepository cofreHistoricoRepository;
 
 	public void criarCofre(Cofre cofre) { 
+		Conta conta = contaBusiness.buscarConta(cofre.getConta().getCodigo());
 		cofreRepository.save(cofre);
 	}
 	
