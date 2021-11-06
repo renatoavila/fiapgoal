@@ -121,6 +121,19 @@ public class PessoaController {
 		 return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "api/pessoa/{id}/conta/cofre/{idCofre}", method = RequestMethod.GET)
+	public ResponseEntity<Cofre> getCofre(@PathVariable(value = "id") int id,@PathVariable(value = "idCofre") int idCofre) {
+		Log(idCofre);
+		
+		var cofreLista = cofreBusiness.buscarCofre(idCofre);
+		 if(cofreLista != null && cofreLista.isPresent())
+			 return new ResponseEntity<Cofre>(cofreLista.get(), HttpStatus.OK);
+		 else
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
+	
+	
 	private void Log(Object o) {
 		Gson gson = new Gson();    
 	    String json = gson.toJson(o);

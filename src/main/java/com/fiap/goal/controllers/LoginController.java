@@ -25,11 +25,7 @@ public class LoginController {
 	
 	 @RequestMapping(value = "api/login/", method = RequestMethod.POST)
 	public  ResponseEntity<Pessoa> get(@RequestBody UsuarioViewModel usuario) {
-		 
-		 	Gson gson = new Gson();    
-		    String json = gson.toJson(usuario);
-		    System.out.println(json);
-		    
+		 Log(usuario);
 		 System.out.println("");
 		 Pessoa pessoa = pessoaBusiness.buscaPessoa(usuario);
 		 
@@ -43,5 +39,11 @@ public class LoginController {
          return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 	}
+	 
+	 private void Log(Object o) {
+			Gson gson = new Gson();    
+		    String json = gson.toJson(o);
+		    System.out.println(json);
+	 }
 
 }
