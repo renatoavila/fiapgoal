@@ -143,13 +143,21 @@ public class PessoaController {
 	}
 	
 	@RequestMapping(value = "api/pessoa/{id}/usouPromocao", method = RequestMethod.GET)
-	public ResponseEntity<Boolean> getusouPromocao(@PathVariable(value = "id") long id) {
+	public ResponseEntity<Boolean> getUsouPromocao(@PathVariable(value = "id") long id) {
  
 		PessoaPromocao pessoaPromocao = pessoaPromocaoBusiness.usouPromocao(id);  
 		Boolean sucesso = pessoaPromocao != null;
 		return new ResponseEntity<Boolean>(sucesso, sucesso ? HttpStatus.OK : HttpStatus.NOT_FOUND);
 	}
-	  
+	 
+	@RequestMapping(value = "api/pessoa/{id}/conta/cofre/{idCofre}", method = RequestMethod.DELETE)
+	public ResponseEntity<Boolean> deleteCofre(@PathVariable(value = "id") int id,@PathVariable(value = "idCofre") int idCofre) {
+		Log(idCofre);
+		
+		var sucesso = cofreBusiness.deletarCofre(id, idCofre);
+		return new ResponseEntity<Boolean>(sucesso, sucesso ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
+	}
+	
 	
 	private void Log(Object o) {
 		Gson gson = new Gson();    
