@@ -15,12 +15,13 @@ public class CofreViewModel{
     	super();
     }
 	
-	public CofreViewModel(String nome, String descricaoMeta, Date vencimentoMeta, double valorMeta, Conta conta) {
+	public CofreViewModel(String nome, String descricaoMeta, Date vencimentoMeta, double valorMeta, double valorTotal, Conta conta) {
 		super();
 		this.nome = nome;
 		this.descricaoMeta = descricaoMeta;
 		this.vencimentoMeta = vencimentoMeta;
 		this.valorMeta = valorMeta;
+		this.valorTotal = valorTotal;
 	}
 	
 	public String getNome() {
