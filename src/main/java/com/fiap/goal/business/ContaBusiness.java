@@ -58,7 +58,7 @@ public class ContaBusiness {
 					{
 						soma += cofre.get(i).getValorTotal();
 					}
-					conta.setSaldo(conta.getSaldo() + soma);
+					conta.setSaldoTotal(conta.getSaldoLivre() + soma);
 				}
 
 				conta.setCofre(cofre);
@@ -85,7 +85,7 @@ public class ContaBusiness {
 			return false;
 		}
 		
-		conta.setSaldo(conta.getSaldo() + valor);
+		conta.setSaldoLivre(conta.getSaldoLivre() + valor);
 		contaRepository.save(conta);
 		 
 		Pessoa pessoa = pessoaBusiness.buscaPessoa(codigoPessoa);

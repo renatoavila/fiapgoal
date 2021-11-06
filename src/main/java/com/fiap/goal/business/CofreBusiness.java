@@ -26,8 +26,8 @@ public class CofreBusiness {
 
 	public Boolean criarCofre(Cofre cofre) { 
 		Conta conta = contaBusiness.buscarConta(cofre.getConta().getCodigo());
-		conta.setSaldo(conta.getSaldo() - cofre.getValorTotal());
-		if(conta.getSaldo() >= 0)
+		conta.setSaldoLivre(conta.getSaldoLivre() - cofre.getValorTotal());
+		if(conta.getSaldoLivre() >= 0)
 		{
 			contaBusiness.editarConta(conta);
 			cofreRepository.save(cofre);
@@ -41,8 +41,8 @@ public class CofreBusiness {
 		Cofre cofreAnterior = this.buscarCofre(cofre.getCodigo()).get();
 		Conta conta = contaBusiness.buscarConta(cofre.getConta().getCodigo());	
 		Double diferenca =  cofreAnterior.getValorTotal() - cofre.getValorTotal();
-		conta.setSaldo(conta.getSaldo() + diferenca);
-		if(conta.getSaldo() >= 0)
+		conta.setSaldoLivre(conta.getSaldoLivre() + diferenca);
+		if(conta.getSaldoLivre() >= 0)
 		{
 			contaBusiness.editarConta(conta);
 			cofreRepository.save(cofre);
@@ -58,8 +58,8 @@ public class CofreBusiness {
 		Conta contaTemp = contaBusiness.buscarContaPorPessoa(codigoPessoa, false);	  
 		Conta conta = contaBusiness.buscarConta(contaTemp.getCodigo());	
 		Cofre cofre = this.buscarCofre(codigoCofre).get();
-		conta.setSaldo(conta.getSaldo() + cofre.getValorTotal() );
-		if(conta.getSaldo() >= 0)
+		conta.setSaldoLivre(conta.getSaldoLivre() + cofre.getValorTotal() );
+		if(conta.getSaldoLivre() >= 0)
 		{
 			cofre.setConta(conta);
 			contaBusiness.editarConta(conta);

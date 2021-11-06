@@ -42,6 +42,7 @@ public class Cofre implements Serializable{
     private Conta conta;
     
     @OneToMany
+    @JsonIgnore
     private List<CofreHistorico> cofreHistorico;
     
     public Cofre() {

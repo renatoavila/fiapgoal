@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -27,7 +28,9 @@ public class Conta implements Serializable{
 	 
 	private String agencia;
 	private String numero;
-	private Double saldo;
+	private Double saldoLivre;
+	@Transient
+	private Double saldoTotal;
 	@OneToOne
 	@JsonIgnore
 	private Pessoa pessoa;	
@@ -39,11 +42,11 @@ public class Conta implements Serializable{
 		super(); 
 	}
 	
-	public Conta(String agencia, String numero, Double saldo, Pessoa pessoa) {
+	public Conta(String agencia, String numero, Double saldoLivre, Pessoa pessoa) {
 		super();
 		this.agencia = agencia;
 		this.numero = numero;
-		this.saldo = saldo;
+		this.saldoLivre = saldoLivre;
 		this.pessoa = pessoa;
 	}
 	
@@ -79,12 +82,21 @@ public class Conta implements Serializable{
 		this.pessoa = pessoa;
 	}
 
-	public Double getSaldo() {
-		return saldo;
+	public Double getSaldoLivre() {
+		return saldoLivre;
 	}
 
-	public void setSaldo(Double saldo) {
-		this.saldo = saldo;
+	public void setSaldoLivre(Double saldo) {
+		this.saldoLivre = saldo;
+	}
+	
+
+	public Double getSaldoTotal() {
+		return saldoTotal;
+	}
+
+	public void setSaldoTotal(Double saldoTotal) {
+		this.saldoTotal = saldoTotal;
 	}
 	
 	
