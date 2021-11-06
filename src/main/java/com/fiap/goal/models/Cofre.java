@@ -35,8 +35,7 @@ public class Cofre implements Serializable{
 	private Date vencimentoMeta;
     private double valorTotal;
     private double valorMeta;
-
-     
+ 
     @JsonIgnore
     private Conta conta;
     
