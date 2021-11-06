@@ -120,7 +120,7 @@ public class PessoaController {
 				cofreModel.getValorTotal(),
 				conta				
 				);
-		 cofreBusiness.criarCofre(cofre);
+		 cofreBusiness.editarCofre(cofre);
 		 return new ResponseEntity<Cofre>(cofre, HttpStatus.OK);
 	}
 	
