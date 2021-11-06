@@ -88,7 +88,7 @@ public class PessoaController {
 	}
 	
 	@RequestMapping(value = "api/pessoa/{id}/conta/cofre/", method = RequestMethod.POST)
-	public ResponseEntity<Conta> postCofre(@PathVariable(value = "id") int id, @RequestBody CofreViewModel cofreModel) {
+	public ResponseEntity<Cofre> postCofre(@PathVariable(value = "id") int id, @RequestBody CofreViewModel cofreModel) {
 		Log(cofreModel);
 		Conta conta = contaBusiness.buscarConta(id);
 		Cofre cofre = new Cofre(
@@ -100,7 +100,7 @@ public class PessoaController {
 				conta				
 				);
 		 cofreBusiness.criarCofre(cofre);
-		 return new ResponseEntity<>(HttpStatus.OK);
+		 return new ResponseEntity<Cofre>(cofre, HttpStatus.OK);
 	}
 
 	
@@ -118,7 +118,7 @@ public class PessoaController {
 				conta				
 				);
 		 cofreBusiness.criarCofre(cofre);
-		 return new ResponseEntity<>(HttpStatus.OK);
+		 return new ResponseEntity<Cofre>(cofre, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "api/pessoa/{id}/conta/cofre/{idCofre}", method = RequestMethod.GET)
