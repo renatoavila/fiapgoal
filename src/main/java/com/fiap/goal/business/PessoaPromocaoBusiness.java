@@ -31,6 +31,6 @@ public class PessoaPromocaoBusiness {
 	public PessoaPromocao usouPromocao(long codigoPessoa)
 	{
 		Pessoa pessoa = pessoaBusiness.buscaPessoa(codigoPessoa);
-		return  this.usouPromocao(pessoa);
+		return  pessoaPromocaoRepository.findByPessoa(pessoa);
 	}
 }

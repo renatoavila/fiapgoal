@@ -26,7 +26,9 @@ private static final long serialVersionUID = 1L;
 	 
     private double valor;
     
-    
+    public PessoaPromocao() {
+		super(); 
+	}
 	public PessoaPromocao(Pessoa pessoa, double valor) {
 		super();
 		this.pessoa = pessoa;
