@@ -99,6 +99,7 @@ public class PessoaController {
 				cofreModel.getCadastro(),
 				cofreModel.getVencimentoMeta(),
 				cofreModel.getValorMeta(),	
+				cofreModel.getValorTotal(),
 				conta				
 				);
 		 cofreBusiness.criarCofre(cofre);
@@ -116,6 +117,7 @@ public class PessoaController {
 				cofreModel.getCadastro(),
 				cofreModel.getVencimentoMeta(),
 				cofreModel.getValorMeta(),	
+				cofreModel.getValorTotal(),
 				conta				
 				);
 		 cofreBusiness.criarCofre(cofre);
