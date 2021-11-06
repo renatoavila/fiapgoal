@@ -35,6 +35,7 @@ public class Cofre implements Serializable{
 	private Date vencimentoMeta;
     private double valorTotal;
     private double valorMeta;
+    private Boolean isDeletado;
  
     @ManyToOne(cascade = CascadeType.ALL)
     @JsonIgnore
@@ -57,6 +58,7 @@ public class Cofre implements Serializable{
 		this.valorTotal = valorTotal;
 		this.conta = conta;
 		this.cadastro = cadastro;
+		this.isDeletado = false;
 	}
 	
 	public Cofre(long codigo, String nome, String descricaoMeta,Date cadastro, Date vencimentoMeta,  double valorMeta,  double valorTotal, Conta conta) {
@@ -69,6 +71,7 @@ public class Cofre implements Serializable{
 		this.cadastro = cadastro;
 		this.valorMeta = valorMeta;
 		this.conta = conta;
+		this.isDeletado = false;
 	}
 	
 	public long getCodigo() {
@@ -127,5 +130,11 @@ public class Cofre implements Serializable{
 		this.conta = conta;
 	}
     
+	public Boolean getIsDeletado() {
+		return isDeletado;
+	}
+	public void setIsDeletado(Boolean IsDeletado) {
+		this.isDeletado = IsDeletado;
+	}
     
 }

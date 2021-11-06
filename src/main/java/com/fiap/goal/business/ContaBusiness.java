@@ -55,8 +55,9 @@ public class ContaBusiness {
 				{
 					double soma = 0;
 					for(int i = 0; i < cofre.size(); i++)
-					{
-						soma += cofre.get(i).getValorTotal();
+					{ 
+							soma += cofre.get(i).getValorTotal();
+						 
 					}
 					conta.setSaldoTotal(conta.getSaldoLivre() + soma);
 				}

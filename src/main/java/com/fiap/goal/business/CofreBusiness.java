@@ -3,6 +3,7 @@ package com.fiap.goal.business;
 import com.fiap.goal.models.*;
 import com.fiap.goal.repository.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
  
@@ -29,6 +30,7 @@ public class CofreBusiness {
 		conta.setSaldoLivre(conta.getSaldoLivre() - cofre.getValorTotal());
 		if(conta.getSaldoLivre() >= 0)
 		{
+			cofre.setIsDeletado(false);
 			contaBusiness.editarConta(conta);
 			cofreRepository.save(cofre);
 			return true;
@@ -44,6 +46,7 @@ public class CofreBusiness {
 		conta.setSaldoLivre(conta.getSaldoLivre() + diferenca);
 		if(conta.getSaldoLivre() >= 0)
 		{
+			cofre.setIsDeletado(false);
 			contaBusiness.editarConta(conta);
 			cofreRepository.save(cofre);
 			return true;
@@ -63,7 +66,8 @@ public class CofreBusiness {
 		{
 			cofre.setConta(conta);
 			contaBusiness.editarConta(conta);
-			cofreRepository.delete(cofre);
+			cofre.setIsDeletado(true);
+			cofreRepository.save(cofre);
 			return true;
 		}
 		else {
@@ -72,7 +76,18 @@ public class CofreBusiness {
 	}
 	
 	public List<Cofre> buscarCofreDaConta(Conta conta) { 
-		return this.cofreRepository.findByConta(conta);
+		 List<Cofre> listCofre =  this.cofreRepository.findByConta(conta);
+		 ArrayList<Cofre> listCofreRetorno = new ArrayList<>();
+		 for(int i = 0; i < listCofre.size(); i++)
+		{ 
+			if(!listCofre.get(i).getIsDeletado()) 
+			{
+				listCofreRetorno.add(listCofre.get(i));
+			}
+			 
+			 
+		} 
+		 return listCofreRetorno;
 	}
 	  
 	public Optional<Cofre> buscarCofre(long Codigo) { 
