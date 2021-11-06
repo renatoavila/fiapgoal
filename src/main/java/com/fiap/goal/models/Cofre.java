@@ -36,6 +36,7 @@ public class Cofre implements Serializable{
     private double valorTotal;
     private double valorMeta;
  
+    @ManyToOne(cascade = CascadeType.ALL)
     @JsonIgnore
     private Conta conta;
     
