@@ -6,6 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ public class LoginController {
 	PessoaBusiness pessoaBusiness;
 	
 	 @RequestMapping(value = "api/login/", method = RequestMethod.POST)
+	 @CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 	public  ResponseEntity<Pessoa> get(@RequestBody UsuarioViewModel usuario) {
 		 Log(usuario);
 		 System.out.println("");
