@@ -8,6 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,7 @@ public class PessoaController {
 	CofreBusiness cofreBusiness;
 
 	@RequestMapping(value = "api/pessoa/", method = RequestMethod.POST)
+	 @CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 	public ResponseEntity<Pessoa> post(@RequestBody PessoaViewModel pessoaModel) {
 
 		Log(pessoaModel);
@@ -52,6 +54,7 @@ public class PessoaController {
 	}
 	
 	@RequestMapping(value = "api/pessoa/{id}", method = RequestMethod.PUT)
+	 @CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 	public ResponseEntity<Pessoa> put(@PathVariable(value = "id") int id, @RequestBody PessoaViewModel pessoaModel) {
 		Log(pessoaModel);
 		
@@ -68,6 +71,7 @@ public class PessoaController {
 	}
 	
 	@RequestMapping(value = "api/pessoa/{id}", method = RequestMethod.GET)
+	 @CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 	public ResponseEntity<Pessoa> get(@PathVariable(value = "id") int id) {
 		Log(id);
 		Pessoa pessoa = pessoaBusiness.buscaPessoa(id);
@@ -79,6 +83,7 @@ public class PessoaController {
 	}
 
 	@RequestMapping(value = "api/pessoa/{id}/conta/", method = RequestMethod.GET)
+	 @CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 	public ResponseEntity<Conta> getPessoaConta(@PathVariable(value = "id") int id) {
 		Log(id);
 		Conta conta = contaBusiness.buscarContaPorPessoa(id, true);
@@ -90,6 +95,7 @@ public class PessoaController {
 	}
 	
 	@RequestMapping(value = "api/pessoa/{id}/conta/cofre/", method = RequestMethod.POST)
+	 @CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 	public ResponseEntity<Cofre> postCofre(@PathVariable(value = "id") int id, @RequestBody CofreViewModel cofreModel) {
 		Log(cofreModel);
 		Conta conta = contaBusiness.buscarContaPorPessoa(id, false);
@@ -107,6 +113,7 @@ public class PessoaController {
 	}
 	
 	@RequestMapping(value = "api/pessoa/{id}/conta/cofre/{idCofre}", method = RequestMethod.PUT)
+	 @CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 	public ResponseEntity<Cofre> putCofre(@PathVariable(value = "id") int id,@PathVariable(value = "idCofre") int idCofre,@RequestBody CofreViewModel cofreModel) {
 		Log(cofreModel);
 		Conta conta = contaBusiness.buscarContaPorPessoa(id, false);
@@ -125,6 +132,7 @@ public class PessoaController {
 	}
 	
 	@RequestMapping(value = "api/pessoa/{id}/conta/cofre/{idCofre}", method = RequestMethod.GET)
+	 @CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 	public ResponseEntity<Cofre> getCofre(@PathVariable(value = "id") int id,@PathVariable(value = "idCofre") int idCofre) {
 		Log(idCofre);
 		
@@ -136,6 +144,7 @@ public class PessoaController {
 	}
 	
 	@RequestMapping(value = "api/pessoa/{id}/conta/{idConta}/promocao/", method = RequestMethod.POST)
+	 @CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 	public ResponseEntity<Boolean> postPromocao(@PathVariable(value = "id") long id, @PathVariable(value = "idConta") long idConta, @RequestBody Double valor) {
 
 		Log(valor);
@@ -145,6 +154,7 @@ public class PessoaController {
 	}
 	
 	@RequestMapping(value = "api/pessoa/{id}/usouPromocao/", method = RequestMethod.GET)
+	 @CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 	public ResponseEntity<Boolean> getUsouPromocao(@PathVariable(value = "id") long id) {
  
 		PessoaPromocao pessoaPromocao = pessoaPromocaoBusiness.usouPromocao(id);  
@@ -153,6 +163,7 @@ public class PessoaController {
 	}
 	 
 	@RequestMapping(value = "api/pessoa/{id}/conta/cofre/{idCofre}", method = RequestMethod.DELETE)
+	 @CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 	public ResponseEntity<Boolean> deleteCofre(@PathVariable(value = "id") int id,@PathVariable(value = "idCofre") int idCofre) {
 		Log(idCofre);
 		
